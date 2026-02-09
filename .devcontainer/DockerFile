@@ -1,0 +1,21 @@
+FROM mcr.microsoft.com/devcontainers/base:ubuntu
+
+SHELL ["/bin/bash", "-c"]
+
+# Install the rust package
+RUN apt-get update && apt-get install -y \
+    curl \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Switch to the vscode user and set the working directory
+ARG USERNAME=vscode
+USER $USERNAME
+WORKDIR /home/$USERNAME
+
+# Install rustup and the latest stable Rust toolchain for that user
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
+
+# Update PATH for all users
+ENV PATH="/home/$USERNAME/.cargo/bin:$PATH"
+
