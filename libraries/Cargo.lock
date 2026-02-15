@@ -3,12 +3,5 @@
 version = 4
 
 [[package]]
-name = "hello-rust"
-version = "0.1.0"
-dependencies = [
- "libraries",
-]
-
-[[package]]
 name = "libraries"
 version = "0.1.0"
