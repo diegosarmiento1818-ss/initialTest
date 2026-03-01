@@ -30,7 +30,7 @@ Prerequesites:
 6. Check the logs of the container using the ID
 - `docker logs c50f98ded1fd`
 
-### Jenkins
+# Jenkins
 ## Concepts
 Access Jenkins running locally: http://localhost:8080
 
@@ -40,12 +40,30 @@ Access Jenkins running locally: http://localhost:8080
 
 **agent docker** --> docker pipeline plugin must be installed in Jenkins
 
-## Tipps/prerequesities
+## Prerequesities
 AdminUser: Jenkinsadmin
 
 1. Jenkins installed locally
 2. Jenkins user added to doker group to be able to execute docker commands when using the docker agent
 - `sudo usermod -aG docker jenkins`
+
+3. Using **ngrok**
+Github notifies to jenkings about a push to a branch through webhooks. This configuration must be done in the repo. Github can only push to a public URL, since jenkins is running locallly a workaorund was to install ngrok.
+
+Ngrok creates secure, public URLs (tunnels) to locally hosted services, allowing developers to expose internal applications, webhooks, and APIs directly to the internet.
+
+`sudo snap install ngrok`
+
+Sign up and get the token from the dashboard
+
+`ngrok config add-authtoken <YOUR_AUTHTOKEN>`
+
+After that start the tunnel to jenkins port 
+
+`ngrok http 8080`
+
+The created public URL must be configure in Github
+- https://vinelike-larry-coessential.ngrok-free.dev
 
 # Github
 ## General
