@@ -34,9 +34,18 @@ Prerequesites:
 ## Concepts
 Access Jenkins running locally: http://localhost:8080
 
-**Agent**: defines where the pipeline runs. `agent any` means run on any available executor/agent
+**Agent**: defines where the pipeline runs. 
 
+**agent any** means run on any available executor/agent
+
+**agent docker** --> docker pipeline plugin must be installed in Jenkins
+
+## Tipps/prerequesities
 AdminUser: Jenkinsadmin
+
+1. Jenkins installed locally
+2. Jenkins user added to doker group to be able to execute docker commands when using the docker agent
+- `sudo usermod -aG docker jenkins`
 
 # Github
 ## General
