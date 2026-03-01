@@ -37,3 +37,9 @@ Access Jenkins running locally: http://localhost:8080
 **Agent**: defines where the pipeline runs. `agent any` means run on any available executor/agent
 
 AdminUser: Jenkinsadmin
+
+# Github
+## General
+
+User: diegosarmiento1818-ss
+e-mail: diegosarmiento1818-ss

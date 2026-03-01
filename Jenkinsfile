@@ -1,7 +1,11 @@
 
 pipeline {
 
-    agent any
+    agent {
+        docker {
+            image 'rust:latest'
+        }
+    }
 
     stages {
         stage('Checkout') {
