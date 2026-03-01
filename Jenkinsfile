@@ -19,13 +19,17 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'cargo build --verbose'
+                dir('hello-rust') {
+                    sh 'cargo build --verbose'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'cargo test --verbose'
+                dir('hello-rust') {
+                    sh 'cargo test --verbose'
+                }
             }
         }
     }
