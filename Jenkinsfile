@@ -1,11 +1,12 @@
 
 pipeline {
+
+    agent any
     // Set the PATH environment of rust to make it visible to Jenkins
     environment {
-    PATH = "/home/diegosarmiento/.cargo/bin:${env.PATH}"
-}
-    agent any
-
+        PATH = "/home/diegosarmiento/.cargo/bin:${env.PATH}"
+    }
+    
     stages {
         stage('Checkout') {
             steps {
