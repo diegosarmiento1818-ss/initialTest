@@ -37,3 +37,18 @@ impl Greet for Animal {
         format!("Hello, am an animal, specifically a {:?}! My name is {}!", self.species, self.name)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_person_greet() {
+        let person = Person::new("Alice".to_string(), 30);
+        assert_eq!(person.greet(), "Hello, am a person. My name is Alice and I am 30 years old!");
+    }
+    #[test]
+    fn test_animal_greet() {
+        let animal = Animal::new("Buddy".to_string(), AnimalSpecie::Dog);
+        assert_eq!(animal.greet(), "Hello, am an animal, specifically a Dog! My name is Buddy!");
+    }
+}
