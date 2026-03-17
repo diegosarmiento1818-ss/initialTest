@@ -3,7 +3,7 @@
 ## Set up a dev container
 dev container set in folder .devcontainer. 
 ### devcontainer.json
-Cofigure thins like:
+Cofigure things like:
 - "Customizations" Installation of VS code extensions
 - "RemoteUser" that is not the "root" for example "vscode" user
 1. Using a DockerFile
@@ -22,7 +22,7 @@ Prerequesites:
 2. Build the image with the tag "rust_basics:v1.0.0"
 - `sudo docker build . -t rust_basics:v1.0.0` 
 3. List the actual images
-- `docker images`
+- `docker images` 
 4. Run the image
 - `sudo docker run -d rust_basics:v1.0.0`
 5. List the running containers to copy the ID
@@ -44,7 +44,7 @@ Access Jenkins running locally: http://localhost:8080
 AdminUser: Jenkinsadmin
 
 1. Jenkins installed locally
-2. Jenkins user added to doker group to be able to execute docker commands when using the docker agent
+2. Jenkins user added to docker group to be able to execute docker commands when using the docker agent
 - `sudo usermod -aG docker jenkins`
 
 3. Using **ngrok**
@@ -64,6 +64,35 @@ After that start the tunnel to jenkins port
 
 The created public URL must be configure in Github
 - https://vinelike-larry-coessential.ngrok-free.dev
+
+**Start the service after booting**
+
+add a file to start the service at
+
+`sudo nano /etc/systemd/system/ngrok.service`
+
+and copy the following:
+
+```
+[Unit]
+Description=ngrok tunnel
+After=network.target
+
+[Service]
+ExecStart=/snap/bin/ngrok http --domain=vinelike-larry-coessential.ngrok-free.dev 8080
+Restart=always
+User=diegosarmiento
+
+[Install]
+WantedBy=multi-user.target
+```
+After that, execute followings commands
+```
+sudo systemctl daemon-reexec  --> restart the system without rebooting the machine
+sudo systemctl daemon-reload  --> reload all service definitions from disk
+sudo systemctl enable ngrok  --> starts the service automatically on boot
+sudo systemctl start ngrok  --> starts the service right now
+```
 
 # Github
 ## General
