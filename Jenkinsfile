@@ -10,6 +10,8 @@ pipeline {
     environment {
         IMAGE_NAME = "diegossg/initial_test_rust"
         TAG = "${env.GIT_COMMIT.take(7)}"
+        // Ensure Jenkins finds the rustup-installed Rust
+        PATH = "/var/lib/jenkins/.cargo/bin:${env.PATH}"
     }
 
     stages {
