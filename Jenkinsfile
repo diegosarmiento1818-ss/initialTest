@@ -1,11 +1,11 @@
 
 pipeline {
-
-    agent {
-        docker {
-            image 'rust:latest'
-        }
-    }
+    agent any
+    //agent {
+    //    docker {
+    //        image 'rust:1.93'
+    //    }
+    //}
 
     environment {
         IMAGE_NAME = "diegossg/initial_test_rust"
@@ -39,6 +39,12 @@ pipeline {
                 dir('hello-rust') {
                     sh 'cargo build --verbose'
                 }
+            }
+        }
+
+        stage('Verify Docker') {
+            steps {
+                sh 'docker --version'
             }
         }
 
