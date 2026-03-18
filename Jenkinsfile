@@ -7,6 +7,11 @@ pipeline {
         }
     }
 
+    environment {
+        IMAGE_NAME = "diegossg/initial_test_rust"
+        TAG = "${env.GIT_COMMIT.take(7)}"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -21,14 +26,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                dir('hello-rust') {
-                    sh 'cargo build --verbose'
-                }
-            }
-        }
-
         stage('Test') {
             steps {
                 dir('hello-rust') {
@@ -36,14 +33,44 @@ pipeline {
                 }
             }
         }
+
+        stage('Build-Rust') {
+            steps {
+                dir('hello-rust') {
+                    sh 'cargo build --verbose'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                dir('hello-rust') {
+                    sh 'docker build -t $IMAGE_NAME:$TAG .'
+                }
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-credentials',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    sh 'docker push $IMAGE_NAME:$TAG'
+                }
+            }
+        }
+
     }
 
     post {
         success {
-            echo 'Build and tests passed!'
+            echo 'Build, tests and image push passed!'
         }
         failure {
-            echo 'Build or tests failed.'
+            echo 'Build, tests or image push failed.'
         }
     }
 }

@@ -99,3 +99,14 @@ sudo systemctl start ngrok  --> starts the service right now
 
 User: diegosarmiento1818-ss
 e-mail: diegosarmiento1818-ss
+
+# Docker hub / registry
+## General
+
+### Add some docker registry credentials for jenkins
+1. Add credentials
+registry name: diegossg
+token: see on docker
+
+2. Configure this credentials in jenkins
+Add a username/password credential
