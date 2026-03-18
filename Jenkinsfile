@@ -52,7 +52,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                dir('hello-rust') {
+                {
                     sh 'docker build -t $IMAGE_NAME:$TAG .'
                 }
             }
