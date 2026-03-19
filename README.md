@@ -94,6 +94,10 @@ sudo systemctl enable ngrok  --> starts the service automatically on boot
 sudo systemctl start ngrok  --> starts the service right now
 ```
 
+** Hints for pipeline **
+- agent any used so that jenkins user uses the install toolchain (access to docker, rust)
+- rust 1.93 install for my user and for jenkins user so it can be used in the pipeline
+
 # Github
 ## General
 

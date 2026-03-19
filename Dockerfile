@@ -1,6 +1,6 @@
 # -------------- Build stage --------------
 # Use the official Rust image as the base image
-FROM rust:latest AS builder
+FROM rust:1.93.0 AS builder
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
