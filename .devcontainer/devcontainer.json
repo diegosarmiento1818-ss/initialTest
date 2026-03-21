@@ -14,13 +14,21 @@
 	//"image": "mcr.microsoft.com/devcontainers/rust:2-1-trixie"
 
 	// Use 'mounts' to make the cargo cache persistent in a Docker Volume.
-	// "mounts": [
-	// 	{
-	// 		"source": "devcontainer-cargo-cache-${devcontainerId}",
-	// 		"target": "/usr/local/cargo",
-	// 		"type": "volume"
-	// 	}
-	// ]
+
+	 "mounts": [
+		// Mount the .kube directory from the host to the container to allow kubectl access to the cluster.
+		{
+			"source": "${localEnv:HOME}/.kube", 
+			"target": "/home/vscode/.kube", 
+			"type": "bind"
+		},
+		// Mount the .minikube directory from the host which includes certificates and configuration for minikube.
+		{
+			"source": "${localEnv:HOME}/.minikube",
+			"target": "/home/vscode/.minikube",
+			"type": "bind"
+		}
+	],
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
