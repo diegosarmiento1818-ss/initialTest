@@ -73,7 +73,7 @@ pipeline {
             steps {
                     sh 'helm version'
                     sh 'kubectl version --client'
-                    sh 'kubectl cluster-info'
+                    //sh 'kubectl cluster-info'
             }
         }
         
