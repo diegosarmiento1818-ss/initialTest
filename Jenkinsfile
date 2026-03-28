@@ -74,19 +74,16 @@ pipeline {
                     sh 'helm version'
                     sh 'kubectl version --client'
                     sh 'kubectl cluster-info'
-                }
             }
         }
-
+        
         stage('Deploy to Kubernetes') {
             steps {
                     sh 'helm upgrade --install rust-app ./rust-app \
                     --set image.repository=IMAGE_NAME \
                     --set image.tag=${TAG}'
-                }
             }
         }
-
     }
 
     post {
