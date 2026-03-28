@@ -69,14 +69,32 @@ pipeline {
             }
         }
 
+        stage('Verify helm & kubernetes & kubernetes cluster') {
+            steps {
+                    sh 'helm version'
+                    sh 'kubectl version --client'
+                    sh 'kubectl cluster-info'
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                    sh 'helm upgrade --install rust-app ./rust-app \
+                    --set image.repository=IMAGE_NAME \
+                    --set image.tag=${TAG}'
+                }
+            }
+        }
+
     }
 
     post {
         success {
-            echo 'Build, tests and image push passed!'
+            echo 'Build, tests, image push and deployment passed!'
         }
         failure {
-            echo 'Build, tests or image push failed.'
+            echo 'Build, tests, image push or deployment failed.'
         }
     }
 }
